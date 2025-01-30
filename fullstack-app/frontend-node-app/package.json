@@ -3,12 +3,10 @@
   "version": "1.0.0",
   "dependencies": {
     "mysql": "^2.18.1",
-    "react": "^17.0.2", 
-    "react-scripts": "^4.0.3" 
+    "express": "^4.17.1"  // Add any other necessary dependencies
   },
   "scripts": {
-    "start": "node src/index.js", 
-    "build": "react-scripts build" 
+    "start": "node src/index.js",  // Your existing start script
+    "build": "echo 'No build step for Node.js frontend app.'"  // Placeholder or actual build steps if you have any
   }
 }
-
