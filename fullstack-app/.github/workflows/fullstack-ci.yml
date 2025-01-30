@@ -1,4 +1,4 @@
-name: Fullstack CI/CD Pipeline with docker
+name: Fullstack CI/CD Pipeline with Docker
 
 on:
   push:
@@ -30,7 +30,7 @@ jobs:
 
       - name: Run SQL Initialization Script
         run: |
-          PGPASSWORD=mypassword psql -h localhost -U myuser -d mydatabase -f jenkins-sample-projects/fullstack-app/mysql/init.sql
+          PGPASSWORD=mypassword psql -h localhost -U myuser -d mydatabase -f ./fullstack-app/mysql/init.sql
 
   backend-build:
     name: Build Backend and Create Docker Image
@@ -38,7 +38,7 @@ jobs:
     needs: database-setup
     defaults:
       run:
-        working-directory: jenkins-sample-projects/fullstack-app/backend-java-app
+        working-directory: ./fullstack-app/backend-java-app
 
     steps:
       - name: Checkout Repository
@@ -57,14 +57,14 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: backend-java-build
-          path: jenkins-sample-projects/fullstack-app/backend-java-app/target/*.jar
+          path: ./fullstack-app/backend-java-app/target/*.jar
 
       - name: Log in to Docker Hub
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
       - name: Build and Push Docker Image (Backend)
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/backend-java-app:latest .
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/backend-java-app:latest ./fullstack-app/backend-java-app
           docker push ${{ secrets.DOCKER_USERNAME }}/backend-java-app:latest
 
   frontend-build:
@@ -72,7 +72,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: jenkins-sample-projects/fullstack-app/frontend-node-app
+        working-directory: ./fullstack-app/frontend-node-app
 
     steps:
       - name: Checkout Repository
@@ -93,12 +93,12 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: frontend-node-build
-          path: jenkins-sample-projects/fullstack-app/frontend-node-app/build
+          path: ./fullstack-app/frontend-node-app/build
 
       - name: Log in to Docker Hub
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
       - name: Build and Push Docker Image (Frontend)
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/frontend-node-app:latest .
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/frontend-node-app:latest ./fullstack-app/frontend-node-app
           docker push ${{ secrets.DOCKER_USERNAME }}/frontend-node-app:latest
