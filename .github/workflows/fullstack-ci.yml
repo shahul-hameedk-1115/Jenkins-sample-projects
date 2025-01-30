@@ -38,11 +38,7 @@ jobs:
     needs: database-setup
     defaults:
       run:
-<<<<<<< HEAD
         working-directory: ./fullstack-app/backend-java-app
-=======
-        working-directory: jenkins-sample-projects/fullstack-app/backend-java-app
->>>>>>> origin/main
 
     steps:
       - name: Checkout Repository
@@ -61,11 +57,9 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: backend-java-build
-<<<<<<< HEAD
+
           path: ./fullstack-app/backend-java-app/target/*.jar
-=======
-          path: jenkins-sample-projects/fullstack-app/backend-java-app/target/*.jar
->>>>>>> origin/main
+
 
       - name: Log in to Docker Hub
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
@@ -80,11 +74,9 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-<<<<<<< HEAD
+
         working-directory: ./fullstack-app/frontend-node-app
-=======
-        working-directory: jenkins-sample-projects/fullstack-app/frontend-node-app
->>>>>>> origin/main
+
 
     steps:
       - name: Checkout Repository
@@ -105,11 +97,9 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: frontend-node-build
-<<<<<<< HEAD
+
           path: ./fullstack-app/frontend-node-app/build
-=======
-          path: jenkins-sample-projects/fullstack-app/frontend-node-app/build
->>>>>>> origin/main
+
 
       - name: Log in to Docker Hub
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
