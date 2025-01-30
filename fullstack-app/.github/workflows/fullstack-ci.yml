@@ -1,4 +1,4 @@
-name: Fullstack CI/CD Pipeline
+name: Fullstack CI/CD Pipeline with docker
 
 on:
   push:
