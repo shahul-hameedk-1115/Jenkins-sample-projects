@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "dependencies": {
     "mysql": "^2.18.1",
-    "express": "^4.17.1"  // Add any other necessary dependencies
+    "express": "^4.17.1"  
   },
   "scripts": {
-    "start": "node src/index.js",  // Your existing start script
-    "build": "echo 'No build step for Node.js frontend app.'"  // Placeholder or actual build steps if you have any
+    "start": "node src/index.js",  
+    "build": "echo 'No build step for Node.js frontend app.'"  
   }
 }
